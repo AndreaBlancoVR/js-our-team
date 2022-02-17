@@ -67,6 +67,24 @@ console.log(TEAM_CONTAINER)
 // TEAM_CONTAINER.innerHTML += TEAM_CARD
 
 
+
+// creo la funzione per generare un nuovo oggetto con i tre parametri
+
+function newMember( nameTemp, roleTemp, imageTemp) {
+    return {
+        name: nameTemp,
+        role: roleTemp,
+        image: imageTemp,
+    }
+}
+const nome_ = 'Maria Rossi'
+const apprendista_ = 'Apprendista'
+const image_ = 'new-team-member-01.jpg'
+const newMember_ = newMember(nome_, apprendista_, image_)
+// pusho il nuovo oggetto 
+team.push( newMember_ )
+
+
 // creo un ciclo che legga il contenuto dell'array e 
 // lo uso per assegnare le caratterisiche degli elementi 
 // creati all'interno del ciclo stesso
@@ -86,3 +104,4 @@ for( let i = 0; i < team.length; i++) {
 </div>`
 TEAM_CONTAINER.innerHTML += membro
 }
+
