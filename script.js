@@ -66,42 +66,76 @@ console.log(TEAM_CONTAINER)
 
 // TEAM_CONTAINER.innerHTML += TEAM_CARD
 
+// creo un ciclo che legga il contenuto dell'array e 
+// lo uso per assegnare le caratterisiche degli elementi 
+// creati all'interno del ciclo stesso
+for( let i = 0; i < team.length; i++) {
+    let membro = team[i];
+    membro = 
+    `<div class="team-card">
+        <div class="card-image">
+            <img src="img/${team[i].image}" alt="${team[i].name}"/>
+        </div>
+        <div class="card-text">
+            <h3>${team[i].name}</h3>
+            <p>${team[i].role}</p>
+        </div>
+    </div>`
+    TEAM_CONTAINER.innerHTML += membro
+}
+
+
 
 
 // creo la funzione per generare un nuovo oggetto con i tre parametri
 
-function newMember( nameTemp, roleTemp, imageTemp) {
+function newMemberObject( nameTemp, roleTemp, imageTemp) {
     return {
         name: nameTemp,
         role: roleTemp,
         image: imageTemp,
     }
 }
-const nome_ = 'Maria Rossi'
-const apprendista_ = 'Apprendista'
-const image_ = 'new-team-member-01.jpg'
-const newMember_ = newMember(nome_, apprendista_, image_)
-// pusho il nuovo oggetto 
-team.push( newMember_ )
+
+function InnerNewMember(team) {
+    let membro
+    for( let i = 0; i < team.length; i++) {
+        membro = team[i];
+        membro = 
+        `<div class="team-card">
+            <div class="card-image">
+                <img src="img/${team[i].image}" alt="${team[i].name}"/>
+            </div>
+            <div class="card-text">
+                <h3>${team[i].name}</h3>
+                <p>${team[i].role}</p>
+            </div>
+        </div>`
+        
+    }
+    return membro
+} 
+
+const ADD_MEMBER_BUTTON = document.getElementById('addMemberButton');
+ADD_MEMBER_BUTTON.addEventListener('click', function() {
+
+    const uNome = document.getElementById('name').value;  
+    const uRuolo = document.getElementById('role').value;
+    const uImage = document.getElementById('image').value;
+   
+    const newMember_ = newMemberObject(uNome, uRuolo, uImage)
+    // pusho il nuovo oggetto 
+    team.push( newMember_ )
+
+    
+    
+    const MEMBRO = InnerNewMember (team)
+    TEAM_CONTAINER.innerHTML += MEMBRO
+})
 
 
-// creo un ciclo che legga il contenuto dell'array e 
-// lo uso per assegnare le caratterisiche degli elementi 
-// creati all'interno del ciclo stesso
-for( let i = 0; i < team.length; i++) {
-    let membro = team[i];
-    membro = `<div class="team-card">
-<div class="card-image">
-  <img
-    src="img/${team[i].image}"
-    alt="${team[i].name}"
-  />
-</div>
-<div class="card-text">
-  <h3>${team[i].name}</h3>
-  <p>${team[i].role}</p>
-</div>
-</div>`
-TEAM_CONTAINER.innerHTML += membro
-}
+
+
+
+
 
