@@ -33,19 +33,36 @@ const team = [
 
 const TEAM_CONTAINER = document.querySelector('.team-container')
 console.log(TEAM_CONTAINER)
+
+// const TEAM_CARD = `<div class="team-card">
+// <div class="card-image">
+//   <img
+//     src="img/wayne-barnett-founder-ceo.jpg"
+//     alt="Wayne Barnett"
+//   />
+// </div>
+// <div class="card-text">
+//   <h3>Wayne Barnett</h3>
+//   <p>Founder & CEO</p>
+// </div>
+// </div>`
+
+// TEAM_CONTAINER.innerHTML += TEAM_CARD
+
+
+
 const TEAM_CARD = `<div class="team-card">
 <div class="card-image">
   <img
-    src="img/wayne-barnett-founder-ceo.jpg"
-    alt="Wayne Barnett"
+    src="img/${team[0].image}"
+    alt="${team[0].name}"
   />
 </div>
 <div class="card-text">
-  <h3>Wayne Barnett</h3>
-  <p>Founder & CEO</p>
+  <h3>${team[0].name}</h3>
+  <p>${team[0].role}</p>
 </div>
 </div>`
 
 TEAM_CONTAINER.innerHTML += TEAM_CARD
 
-console.log(TEAM_CONTAINER)
