@@ -32,106 +32,162 @@ const team = [
   ];
 
 const TEAM_CONTAINER = document.querySelector('.team-container')
-console.log(TEAM_CONTAINER)
+const ADD_MEMBER_BUTTON = document.getElementById('addMemberButton');
 
-// const TEAM_CARD = `<div class="team-card">
-// <div class="card-image">
-//   <img
-//     src="img/wayne-barnett-founder-ceo.jpg"
-//     alt="Wayne Barnett"
-//   />
-// </div>
-// <div class="card-text">
-//   <h3>Wayne Barnett</h3>
-//   <p>Founder & CEO</p>
-// </div>
-// </div>`
+function getHTMLCard( teamMember ) {
+    const name = teamMember.name;
+    const image = teamMember.image;
+    const role = teamMember.role;
 
-// TEAM_CONTAINER.innerHTML += TEAM_CARD
-
-
-
-// const TEAM_CARD = `<div class="team-card">
-// <div class="card-image">
-//   <img
-//     src="img/${team[0].image}"
-//     alt="${team[0].name}"
-//   />
-// </div>
-// <div class="card-text">
-//   <h3>${team[0].name}</h3>
-//   <p>${team[0].role}</p>
-// </div>
-// </div>`
-
-// TEAM_CONTAINER.innerHTML += TEAM_CARD
-
-// creo un ciclo che legga il contenuto dell'array e 
-// lo uso per assegnare le caratterisiche degli elementi 
-// creati all'interno del ciclo stesso
-for( let i = 0; i < team.length; i++) {
-    let membro = team[i];
-    membro = 
-    `<div class="team-card">
+    return `
+    <div class="team-card">
         <div class="card-image">
-            <img src="img/${team[i].image}" alt="${team[i].name}"/>
+            <img src="img/${image}" alt="${name}"/>
         </div>
         <div class="card-text">
-            <h3>${team[i].name}</h3>
-            <p>${team[i].role}</p>
+            <h3>${name}</h3>
+            <p>${role}</p>
         </div>
-    </div>`
-    TEAM_CONTAINER.innerHTML += membro
+    </div>
+    `;
 }
+
+function newTeamMember( name, image, role ) {
+    return {
+        name: name,
+        image: image,
+        role: role
+    }
+}
+// fa la stessa cosa di quella sopra
+// function newTeamMember( name, image, role ) {
+//     return {
+//         name,
+//         image,
+//         role
+//     }
+// }
+
+function stampaMembroTeam( teamMember ) {
+    const htmlCard = getHTMLCard( teamMember );
+    TEAM_CONTAINER.innerHTML += htmlCard
+}
+
+for( let i = 0; i < team.length; i++) {
+    const teamMember = team[i];
+    stampaMembroTeam( teamMember );
+
+    // const name = teamMember.name;
+    // const image = teamMember.image;
+    // const role = teamMember.role;
+
+    // const htmlCard = 
+    // `
+    // <div class="team-card">
+    //     <div class="card-image">
+    //         <img src="img/${image}" alt="${name}"/>
+    //     </div>
+    //     <div class="card-text">
+    //         <h3>${name}</h3>
+    //         <p>${role}</p>
+    //     </div>
+    // </div>
+    // `;
+    // TEAM_CONTAINER.innerHTML += htmlCard
+}
+
+
+
+// const newMember = newTeamMember( 'Mario', 'MarioRossi.jpg', 'Apprendista' )
+
+
+
+
+
+ADD_MEMBER_BUTTON.addEventListener('click',addNewMember); 
+
+    const nameInput = document.getElementById('name');  
+    const roleInput = document.getElementById('role');
+    const imageInput = document.getElementById('image');
+
+function addNewMember() {
+    // prendo i valori dagli imput
+    const name = nameInput.value;
+    const role = roleInput.value;
+    const image = imageInput.value;
+
+    if( !name || !image || !role ) {
+        alert('I dati inseriti non sono corretti.')
+        return
+    }
+
+
+    // creo nuovo oggetto con name, image e role
+    const teamMember = newTeamMember(name, image, role);
+
+    // pusho l'oggetto nell'array dei membri del team
+    team.push( teamMember );
+
+    // stampo nel dom la card appena creata e pushata
+    stampaMembroTeam( teamMember );
+
+    nameInput = ''
+    roleInput = ''
+    roleInput = ''
+}
+
+
+
+
 
 
 
 
 // creo la funzione per generare un nuovo oggetto con i tre parametri
 
-function newMemberObject( nameTemp, roleTemp, imageTemp) {
-    return {
-        name: nameTemp,
-        role: roleTemp,
-        image: imageTemp,
-    }
-}
+// function newMemberObject( nameTemp, roleTemp, imageTemp) {
+//     return {
+//         name: nameTemp,
+//         role: roleTemp,
+//         image: imageTemp,
+//     }
+// }
 
-function InnerNewMember(team) {
-    let membro
-    for( let i = 0; i < team.length; i++) {
-        membro = team[i];
-        membro = 
-        `<div class="team-card">
-            <div class="card-image">
-                <img src="img/${team[i].image}" alt="${team[i].name}"/>
-            </div>
-            <div class="card-text">
-                <h3>${team[i].name}</h3>
-                <p>${team[i].role}</p>
-            </div>
-        </div>`
+// function InnerNewMember(team) {
+//     let membro
+//     for( let i = 0; i < team.length; i++) {
+//         membro = team[i];
+//         membro = 
+//         `<div class="team-card">
+//             <div class="card-image">
+//                 <img src="img/${team[i].image}" alt="${team[i].name}"/>
+//             </div>
+//             <div class="card-text">
+//                 <h3>${team[i].name}</h3>
+//                 <p>${team[i].role}</p>
+//             </div>
+//         </div>`
         
-    }
-    return membro
-} 
+//     }
+//     return membro
+// } 
 
-const ADD_MEMBER_BUTTON = document.getElementById('addMemberButton');
-ADD_MEMBER_BUTTON.addEventListener('click', function() {
+// const ADD_MEMBER_BUTTON = document.getElementById('addMemberButton');
+// ADD_MEMBER_BUTTON.addEventListener('click', function() {
 
-    const uNome = document.getElementById('name').value;  
-    const uRuolo = document.getElementById('role').value;
-    const uImage = document.getElementById('image').value;
+//     const uNome = document.getElementById('name').value;  
+//     const uRuolo = document.getElementById('role').value;
+//     const uImage = document.getElementById('image').value;
    
-    const newMember_ = newMemberObject(uNome, uRuolo, uImage)
-    // pusho il nuovo oggetto 
-    team.push( newMember_ )
+//     const newMember_ = newMemberObject(uNome, uRuolo, uImage)
+//     // pusho il nuovo oggetto 
+//     team.push( newMember_ )
 
     
     
-    const MEMBRO = InnerNewMember (team)
-    TEAM_CONTAINER.innerHTML += MEMBRO
-})
+//     const MEMBRO = InnerNewMember (team)
+//     TEAM_CONTAINER.innerHTML += MEMBRO
+// })
 
 
 
